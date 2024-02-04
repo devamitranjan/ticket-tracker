@@ -1,0 +1,38 @@
+{
+  "ExportDefault": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "expd",
+    "body": ["export {default} from \"./$1\";"],
+    "description": "Export default the current component"
+  },
+  "FunctionalDivComponent": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "fdc",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "const $1:React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className }) => {",
+      "\treturn <div className={className}>$2</div>;",
+      "}",
+      "",
+      "export default $1;"
+    ]
+  },
+  "FunctionalDivComponentWithProps": {
+    "scope": "javascript,typescript,typescriptreact",
+    "prefix": "fdcp",
+    "body": [
+      "import React from \"react\";",
+      "",
+      "interface $1Props extends React.HTMLAttributes<HTMLDivElement> {",
+      "\t $3",
+      "}",
+      "",
+      "const $1:React.FC<$1Props> = ({ className }) => {",
+      "\treturn <div className={className}>$2</div>;",
+      "}",
+      "",
+      "export default $1;"
+    ]
+  }
+}
