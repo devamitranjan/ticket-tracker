@@ -2,12 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
-  return (
-    <div>
-      Main Layout
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };
 
 export default MainLayout;
