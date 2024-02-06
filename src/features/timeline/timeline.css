@@ -2,21 +2,26 @@ body {
   background: #5d76b5;
 }
 
-.timeline-header {
-  margin-top: 2.5rem;
-  text-align: center;
-  color: #fff;
-  font-family: 'Courier New', Courier, monospace;
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.timeline {
+.timeline-header {
+  text-align: center;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.timeline-items {
   position: relative;
   max-width: 1200px;
   margin: 100px auto;
 }
 
-.timeline::after {
-  content: '';
+.timeline-items::after {
+  content: "";
   position: absolute;
   width: 6px;
   height: 100%;
@@ -130,10 +135,10 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .timeline {
+  .timeline-items {
     margin: 50px auto;
   }
-  .timeline::after {
+  .timeline-items::after {
     left: 31px;
   }
 

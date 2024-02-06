@@ -1,28 +1,25 @@
-import React from 'react';
-import { useNavigate, useRoutes } from 'react-router-dom';
+import React from "react";
+import { Navigate, useRoutes } from "react-router-dom";
 
-import MainLayout from './layout/MainLayout';
-import Dashboard from './features/dashboard/Dashboard';
-
-import './App.css';
-import Timeline from './features/timeline/Timeline';
+import Dashboard from "./features/dashboard/Dashboard";
+import Timeline from "./features/timeline/Timeline";
+import "./App.css";
 
 function App() {
-  const navigate = useNavigate();
   const routes = useRoutes([
     {
-      path: '/',
-      element: <MainLayout />,
+      path: "timeline",
+      element: <Dashboard />,
       children: [
         {
-          path: 'dashboard',
-          element: <Dashboard />,
-        },
-        {
-          path: 'timeline/:id',
+          path: ":id",
           element: <Timeline />,
         },
       ],
+    },
+    {
+      path: "/",
+      element: <Navigate to='/timeline' />,
     },
   ]);
 
