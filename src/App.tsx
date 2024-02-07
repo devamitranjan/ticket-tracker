@@ -3,7 +3,6 @@ import { Navigate, useRoutes } from "react-router-dom";
 
 import Dashboard from "./features/dashboard/Dashboard";
 import Timeline from "./features/timeline/Timeline";
-import "./App.css";
 
 function App() {
   const routes = useRoutes([
