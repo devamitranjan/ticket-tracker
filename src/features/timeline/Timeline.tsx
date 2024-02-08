@@ -13,7 +13,7 @@ const Timeline: React.FC<TimelineProps> = ({ className }) => {
     <TimelineContainer>
       <TimelineHeader>
         <h3>{data.ticketId}</h3>
-        {data.ticketDescription}
+        <p>{data.ticketDescription}</p>
       </TimelineHeader>
       <TimelineItems>
         {data.ticketItems.map((ticketItem, index) => (
@@ -48,7 +48,7 @@ const lineAnimation = keyframes`
 const TimelineItems = styled.div`
   position: relative;
   max-width: 1200px;
-  margin: 100px auto;
+  margin: 50px auto;
   &::after {
     content: "";
     position: absolute;
@@ -61,7 +61,7 @@ const TimelineItems = styled.div`
     animation: ${lineAnimation} 5s linear forwards;
   }
   @media screen and (max-width: 600px) {
-    margin: 50px auto;
+    margin: 25px auto;
     &::after {
       left: 31px;
     }

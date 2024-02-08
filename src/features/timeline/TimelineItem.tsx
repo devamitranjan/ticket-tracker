@@ -41,18 +41,17 @@ const TimelineItemContainer = styled.div<{ $index: number }>`
   animation: ${downAnimation} 1s linear forwards;
   opacity: 0;
   left: ${({ $index }) => ($index % 2 === 0 ? 0 : "50%")};
-  &:nth-child(n) {
-    animation-delay: ${({ $index }) =>
-      $index !== 0 ? 2 * $index - 1 + "s" : 0} };
-  }
   @media screen and (max-width: 600px) {
     width: 100%;
     padding-left: 80px;
     padding-right: 25px;
-    border-right: 15px solid #fff;
-    border-left: 0;
-    left: -14px;
+    left: 0;
   }
+  &:nth-child(n) {
+    animation-delay: ${({ $index }) =>
+      $index !== 0 ? 2 * $index - 1 + "s" : 0 + "s"} };
+  }
+  
 `;
 
 const TimeLineDot = styled.div<{ $index: number }>`
@@ -63,6 +62,9 @@ const TimeLineDot = styled.div<{ $index: number }>`
   position: absolute;
   border-radius: 50%;
   background-color: #fff;
+  @media screen and (max-width: 600px) {
+    left: 20px;
+  }
   ${({ $index }) => ($index % 2 === 0 ? "" : "left: -10px")}
 `;
 
@@ -97,6 +99,11 @@ const TimelineItemArrow = styled.span<{ $index: number }>`
   border-${({ $index }) =>
     $index % 2 === 0 ? "left" : "right"}: 15px solid #fff;
   ${({ $index }) => ($index % 2 === 0 ? "right" : "left")}: -14px;
+  @media screen and (max-width: 600px) {
+    border-right: 15px solid #fff;
+    border-left: 0;
+    left: -14px;
+  }
 `;
 
 export default TimelineItem;
