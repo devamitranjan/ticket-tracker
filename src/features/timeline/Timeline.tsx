@@ -7,8 +7,6 @@ import TimelineItem from "./TimelineItem";
 interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Timeline: React.FC<TimelineProps> = ({ className }) => {
-  const itemLength = data.ticketItems.length;
-
   return (
     <TimelineContainer>
       <TimelineHeader>
