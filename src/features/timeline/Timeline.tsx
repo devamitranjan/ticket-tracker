@@ -3,10 +3,13 @@ import styled, { keyframes } from "styled-components";
 
 import data from "../../mocks/ticketData";
 import TimelineItem from "./TimelineItem";
+import NewTimelineItem from "./NewTimelineItem";
 
 interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Timeline: React.FC<TimelineProps> = ({ className }) => {
+  const itemLength = data.ticketItems.length || 1;
+
   return (
     <TimelineContainer>
       <TimelineHeader>
@@ -15,8 +18,21 @@ const Timeline: React.FC<TimelineProps> = ({ className }) => {
       </TimelineHeader>
       <TimelineItems>
         {data.ticketItems.map((ticketItem, index) => (
-          <TimelineItem ticketItem={ticketItem} index={index} key={index} />
+          <TimelineItem $index={index} key={index}>
+            <TimelineItemBox>
+              <h2>{ticketItem.discussionHeader}</h2>
+              <small>{ticketItem.lastModified}</small>
+              <p>{ticketItem.discussionDetails}</p>
+              <TimelineItemArrow $index={index} />
+            </TimelineItemBox>
+          </TimelineItem>
         ))}
+        <TimelineItem $index={itemLength} key={itemLength}>
+          <HiddenItemBox>
+            <NewTimelineItem $index={itemLength} />
+            <TimelineItemArrow $index={itemLength} />
+          </HiddenItemBox>
+        </TimelineItem>
       </TimelineItems>
     </TimelineContainer>
   );
@@ -56,7 +72,7 @@ const TimelineItems = styled.div`
     top: 0;
     left: 50%;
     margin-left: -3px;
-    animation: ${lineAnimation} 5s linear forwards;
+    animation: ${lineAnimation} 3s linear forwards;
   }
   @media screen and (max-width: 600px) {
     margin: 25px auto;
@@ -64,6 +80,50 @@ const TimelineItems = styled.div`
       left: 31px;
     }
   }
+`;
+
+const TimelineItemBox = styled.div`
+  padding: 20px 30px;
+  background: #fff;
+  position: relative;
+  border-radius: 6px;
+  font-size: 15px;
+  h2 {
+    font-weight: 600;
+  }
+  small {
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+    small {
+      margin-bottom: 10px;
+    }
+  }
+`;
+
+const TimelineItemArrow = styled.span<{ $index: number }>`
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 20px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-${({ $index }) =>
+    $index % 2 === 0 ? "left" : "right"}: 15px solid #fff;
+  ${({ $index }) => ($index % 2 === 0 ? "right" : "left")}: -14px;
+  @media screen and (max-width: 600px) {
+    border-right: 15px solid #fff;
+    border-left: 0;
+    left: -14px;
+  }
+`;
+
+const HiddenItemBox = styled.div`
+  padding: 20px 30px 80px 0px;
+  position: relative;
+  border-radius: 6px;
 `;
 
 export default Timeline;
