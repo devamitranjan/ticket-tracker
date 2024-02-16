@@ -1,9 +1,10 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-import data from "../../mocks/ticketData";
+import data from "../../../mocks/ticketData";
 import TimelineItem from "./TimelineItem";
 import NewTimelineItem from "./NewTimelineItem";
+import { Outlet } from "react-router-dom";
 
 interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -11,30 +12,33 @@ const Timeline: React.FC<TimelineProps> = ({ className }) => {
   const itemLength = data.ticketItems.length || 1;
 
   return (
-    <TimelineContainer>
-      <TimelineHeader>
-        <h3>{data.ticketId}</h3>
-        <p>{data.ticketDescription}</p>
-      </TimelineHeader>
-      <TimelineItems>
-        {data.ticketItems.map((ticketItem, index) => (
-          <TimelineItem $index={index} key={index}>
-            <TimelineItemBox>
-              <h2>{ticketItem.discussionHeader}</h2>
-              <small>{ticketItem.lastModified}</small>
-              <p>{ticketItem.discussionDetails}</p>
-              <TimelineItemArrow $index={index} />
-            </TimelineItemBox>
+    <>
+      <Outlet />
+      <TimelineContainer>
+        <TimelineHeader>
+          <h3>{data.ticketId}</h3>
+          <p>{data.ticketDescription}</p>
+        </TimelineHeader>
+        <TimelineItems>
+          {data.ticketItems.map((ticketItem, index) => (
+            <TimelineItem $index={index} key={index}>
+              <TimelineItemBox>
+                <h2>{ticketItem.discussionHeader}</h2>
+                <small>{ticketItem.lastModified}</small>
+                <p>{ticketItem.discussionDetails}</p>
+                <TimelineItemArrow $index={index} />
+              </TimelineItemBox>
+            </TimelineItem>
+          ))}
+          <TimelineItem $index={itemLength} key={itemLength}>
+            <HiddenItemBox>
+              <NewTimelineItem $index={itemLength} />
+              <TimelineItemArrow $index={itemLength} />
+            </HiddenItemBox>
           </TimelineItem>
-        ))}
-        <TimelineItem $index={itemLength} key={itemLength}>
-          <HiddenItemBox>
-            <NewTimelineItem $index={itemLength} />
-            <TimelineItemArrow $index={itemLength} />
-          </HiddenItemBox>
-        </TimelineItem>
-      </TimelineItems>
-    </TimelineContainer>
+        </TimelineItems>
+      </TimelineContainer>
+    </>
   );
 };
 
@@ -110,8 +114,10 @@ const TimelineItemArrow = styled.span<{ $index: number }>`
   top: 20px;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-${({ $index }) =>
-    $index % 2 === 0 ? "left" : "right"}: 15px solid #fff;
+  border-left: ${({ $index }) =>
+    $index % 2 === 0 ? "15px solid #fff" : "none"};
+  border-right: ${({ $index }) =>
+    $index % 2 === 0 ? "none" : "15px solid #fff"};
   ${({ $index }) => ($index % 2 === 0 ? "right" : "left")}: -14px;
   @media screen and (max-width: 600px) {
     border-right: 15px solid #fff;

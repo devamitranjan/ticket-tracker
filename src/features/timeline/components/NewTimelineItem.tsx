@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface NewTimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -6,8 +7,14 @@ interface NewTimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const NewTimelineItem: React.FC<NewTimelineItemProps> = ({ $index }) => {
+  const navigate = useNavigate();
+  const handleClick = React.useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("new");
+  }, []);
+
   return (
-    <NewTimelineItemContainer $index={$index}>
+    <NewTimelineItemContainer $index={$index} onClick={handleClick}>
       <HorizontalBar />
       <VerticalBar />
     </NewTimelineItemContainer>

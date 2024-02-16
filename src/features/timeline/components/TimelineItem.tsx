@@ -1,8 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-import { ITicketItem } from "./timeline.types";
-
 interface TimelineItemProps extends React.HTMLAttributes<HTMLDivElement> {
   $index: number;
 }
@@ -43,9 +41,8 @@ const TimelineItemContainer = styled.div<{ $index: number }>`
   }
   &:nth-child(n) {
     animation-delay: ${({ $index }) =>
-      $index !== 0 ? 2 * $index - 1 + "s" : 0 + "s"} };
+      $index !== 0 ? 2 * $index - 1 + "s" : 0 + "s"};
   }
-  
 `;
 
 const TimeLineDot = styled.div<{ $index: number }>`
