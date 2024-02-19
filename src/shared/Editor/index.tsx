@@ -56,26 +56,24 @@ function Editor() {
 }
 
 const EditorContainer = styled.div`
-  border-radius: 2px;
   color: #000;
   line-height: 1.7;
   font-weight: 400;
   background: #fff;
   position: relative;
   display: block;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 `;
 
 const ContentEditable = styled(LexicalContentEditable)`
   border: 2px solid #d5d2d2;
-  border-radius: 1rem;
   font-size: 15px;
   display: block;
   position: relative;
   outline: 0;
   padding: 0 1.75rem 2.5rem;
   min-height: 10rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
 
 const Placeholder = styled.div`
